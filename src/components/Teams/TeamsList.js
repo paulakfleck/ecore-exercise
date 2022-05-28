@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 const  TeamsList = (props) => {
     const listItems = props.teams.map((team) =>
         <li key={team.id}>
-            {team.name}
-
-            <Link to='/teams/{team.id}'>Home</Link>
+            <Link 
+                to={`/teams/${team.id}`}>
+                    {team.name}
+                </Link>
         </li>
     );
 
