@@ -1,11 +1,11 @@
 import React from 'react';
 
-const  Users = () => {
+const Members = () => {
     return (
         <React.Fragment>
-            <h1>Users</h1>
+            <h1>Team members</h1>
         </React.Fragment>
     )
 }
 
-export default Users;
+export default Members;
