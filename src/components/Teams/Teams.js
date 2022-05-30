@@ -7,7 +7,7 @@ import useFetch from './../../hooks/useFetch';
 
 const Teams = () => {
     const url = 'https://cgjresszgg.execute-api.eu-west-1.amazonaws.com';
-    const [teams, setTeams] = useState([]);
+    const [teams, setTeams] = useState(true);
     const [searchInput, setSearchInput] = useState('');
 
     const getFilter = (searchValue) => {
@@ -28,7 +28,6 @@ const Teams = () => {
 
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
-            console.log('debouncing')
             fetchTeams();
           }, 200)
       

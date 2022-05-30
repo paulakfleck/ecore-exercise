@@ -4,32 +4,46 @@ import { useParams } from 'react-router-dom';
 import useFetch from './../../hooks/useFetch'
 
 import MembersList from '../Members/MembersList';
+import Search from './../Search';
 
 const TeamDetails = () => {
     const url = 'https://cgjresszgg.execute-api.eu-west-1.amazonaws.com';
     const teamId = useParams().team;
-    const [teamTitle, setTeamTitle] = useState('');
-    const [membersList, setMembersList] = useState([]);
+    const [team, setTeam] = useState({});
+    const [membersList, setMembersList] = useState(true); // send as true the first time, so "no members found" won't show up
     const [isLoadingMembers, setIsLoadingMembers] = useState(false);
     const [errorMembers, setErrorMembers] = useState(null);
-    
-    const transformMembers = team => {
-        console.log('team! ', team);
-        setTeamTitle(team.name);
-        fetchMembersHandler(team);
+    const [searchInput, setSearchInput] = useState('');
+
+    const getFilter = (searchValue) => {
+        setSearchInput(searchValue);
     }
 
-   const { isLoading, error, fetchData: fetchTeam } = useFetch(`${url}/teams/${teamId}`, transformMembers);
+    const transformMembers = transformedTeam => {
+        setTeam(transformedTeam);
+        fetchMembersHandler(transformedTeam);
+    }
 
-   useEffect(() => {
-    fetchTeam();
-   }, []);
+    const { isLoading, error, fetchData: fetchTeam } = useFetch(`${url}/teams/${teamId}`, transformMembers);
 
-    
+    useEffect(() => {
+        fetchTeam();
+    }, []);
+
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            if (team && Object.keys(team).length !== 0) {
+                fetchMembersHandler(team);
+            }
+        }, 300);
+
+        return () => clearTimeout(delayDebounceFn)
+    }, [searchInput]);
+
+
     // I tried fetching multiple users in a single request, but I was not successful, so I had to make one call for each member.
     // Patterns I tried: "url/users/<id>,<id>" and "url/users/<id>/<id>"
     const fetchMembersHandler = async (team) => {
-        console.log('fetchMembersHandler');
         let tempMembersList = [];
         const memberIds = [team.teamLeadId, ...team.teamMemberIds];
 
@@ -47,25 +61,34 @@ const TeamDetails = () => {
 
                 const data = await response.json();
 
-                tempMembersList = [...tempMembersList, data];    
+                
+                tempMembersList = [...tempMembersList, data];
             }
-            
-            setMembersList(tempMembersList);
+
+            const filteredMembersList = tempMembersList.filter((member) => {
+                // Filter by first or last name
+                if ((member.firstName.toLowerCase().includes(searchInput.toLowerCase())) || (member.lastName.toLowerCase().includes(searchInput.toLowerCase()))) {
+                    return team;
+                }
+            });
+
+            setMembersList(filteredMembersList);
             setIsLoadingMembers(false);
         }
     };
 
     return (
         <React.Fragment>
-            {!isLoading &&
-                <div>
-                    <h1>Team: <span>{teamTitle}</span></h1>
-                    {isLoadingMembers && <p className="loading">Loading...</p>}
-                    {!isLoadingMembers && errorMembers && <p>{errorMembers}</p>}
-                    {!isLoadingMembers && !errorMembers && <MembersList members={membersList} />}
-                    
-                </div>
-            }
+            <div>
+                <h1>Team: <span>{team.name}</span></h1>
+
+                <Search sendFilter={getFilter} placeholder="Filter by Team name" />
+
+                {isLoadingMembers && <p className="loading">Loading...</p>}
+                {!isLoadingMembers && errorMembers && <p>{errorMembers}</p>}
+                {!isLoadingMembers && !errorMembers && <MembersList members={membersList} />}
+
+            </div>
 
             {isLoading && <p className="loading">Loading...</p>}
             {!isLoading && error && <p>{error}</p>}
