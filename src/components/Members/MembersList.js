@@ -3,7 +3,7 @@ import React from 'react';
 const MembersList = (props) => {
     console.log( props.members);
 
-    // Since the images were not loading from cnd.fakercloud, I removed the "alt" text so the page is more visible, but I prefer to add "alt" to images.
+    // Since the images were not loading from cnd.fakercloud, I removed the "alt" text so the page is more friendly, but I prefer to add "alt" to images.
     const listItems = props.members.map((member) =>
         <li key={member.id}>
             <figure>
