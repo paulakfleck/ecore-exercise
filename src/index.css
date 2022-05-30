@@ -49,6 +49,7 @@ nav {
         text-decoration: none;
         color: #B2E7E8;
       }
+        nav ul li a.active,
         nav ul li a:hover {
           text-decoration: none;
           color: #ED8975;
@@ -118,38 +119,44 @@ ul.list-of-items {
       color: #F2D096;
     }
 
-ul.list-of-cards {
-  
+
+ul.list-of-cards li {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px #f2d096ad solid;
 }
-  ul.list-of-cards li {
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px #f2d096ad solid;
+  ul.list-of-cards li:last-child {
+    border-bottom: none;
   }
-    ul.list-of-cards li:last-child {
-      border-bottom: none;
-    }
-  ul.list-of-cards figure {
-    display: flex;
-    align-items: center;
-    color: #304D63;
+ul.list-of-cards figure {
+  display: flex;
+  align-items: center;
+  color: #304D63;
+}
+  ul.list-of-cards figure figcaption {
+    font-weight: bold;
+    font-size: 16px;
+    margin-left: 10px;
   }
-    ul.list-of-cards figure figcaption {
-      font-weight: bold;
-      font-size: 16px;
-      margin-left: 10px;
-    }
-  ul.list-of-cards .location {
-    font-weight: 400;
-    font-size: 13px;
-    color: #304D63;
+ul.list-of-cards .location {
+  font-weight: 400;
+  font-size: 13px;
+  color: #304D63;
+}
+  ul.list-of-cards .location span {
+    font-weight: bold;
+    color: #F2D096;
   }
-    ul.list-of-cards .location span {
-      font-weight: bold;
-      color: #F2D096;
-    }
+
+ul.empty-results {
+  list-style: none;
+}
+  ul.empty-results li {
+    color: #B2E7E8;
+    font-style: italic;
+  }
 
 input.search {
   width: 380px;
