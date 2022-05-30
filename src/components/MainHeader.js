@@ -1,17 +1,14 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const MainHeader = () => {
     return (
         <nav>
             <ul>
                 <li>
-                    <Link to="/welcome">Welcome!</Link>
+                    <NavLink className={(navData) => navData.isActive ? "active" : "" } to="/welcome">Welcome!</NavLink>
                 </li>
                 <li>
-                    <Link to="/teams">Teams</Link>
-                </li>
-                <li>
-                    <Link to="/members">Team members</Link>
+                    <NavLink className={(navData) => navData.isActive ? "active" : "" } to="/teams">Teams</NavLink>
                 </li>
             </ul>
         </nav>
