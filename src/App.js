@@ -5,7 +5,6 @@ import MainHeader from './components/MainHeader';
 import Welcome from './components/Welcome';
 import Teams from './components/Teams/Teams';
 import TeamDetails from './components/Teams/TeamDetails';
-import Members from './components/Members/Members';
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/teams/:team" element={<TeamDetails />} />
-          <Route path="/members" element={<Members />} />
         </Routes>
       </main>
     </React.Fragment>
