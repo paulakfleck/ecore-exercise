@@ -11,6 +11,7 @@ const useFetch = (url) => {
         const fetchData = async () => {
             try {
                 setIsLoading(true);
+                setError(null);
 
                 const response = await fetch(url);
 
@@ -25,6 +26,7 @@ const useFetch = (url) => {
 
             } catch (error) {
                 setError(error.message);
+                setIsLoading(false);
             }
         };
 
