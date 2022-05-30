@@ -150,3 +150,23 @@ ul.list-of-cards {
       font-weight: bold;
       color: #F2D096;
     }
+
+input.search {
+  width: 380px;
+  height: 30px;
+  background: #F2D096;
+  border: none;
+  padding: 5px;
+  border-radius: 10px;
+  color: #304D63;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-transform: lowercase;
+}
+
+::placeholder,
+:-ms-input-placeholder,
+::-ms-input-placeholder {
+  color: #304D63;
+  opacity: 1;
+}
