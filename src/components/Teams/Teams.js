@@ -14,8 +14,8 @@ const Teams = () => {
         setSearchInput(searchValue);
     }
 
-    const defineTeams = teams => {
-        const filteredTeams = teams.filter((team) => {
+    const defineTeams = fetchedTeams => {
+        const filteredTeams = fetchedTeams.filter((team) => {
             if (team.name.toLowerCase().includes(searchInput.toLowerCase())) {
                 return team;
             }

@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 const Search = (props) => {
     const filterItems = (searchValue) => {
         props.sendFilter(searchValue);

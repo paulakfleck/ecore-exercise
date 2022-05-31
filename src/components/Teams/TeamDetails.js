@@ -43,9 +43,9 @@ const TeamDetails = () => {
 
     // I tried fetching multiple users in a single request, but I was not successful, so I had to make one call for each member.
     // Patterns I tried: "url/users/<id>,<id>" and "url/users/<id>/<id>"
-    const fetchMembersHandler = async (team) => {
+    const fetchMembersHandler = async (transformedTeam) => {
         let tempMembersList = [];
-        const memberIds = [team.teamLeadId, ...team.teamMemberIds];
+        const memberIds = [transformedTeam.teamLeadId, ...transformedTeam.teamMemberIds];
 
         if (memberIds.length > 0) {
             setIsLoadingMembers(true);
@@ -68,7 +68,7 @@ const TeamDetails = () => {
             const filteredMembersList = tempMembersList.filter((member) => {
                 // Filter by first or last name
                 if ((member.firstName.toLowerCase().includes(searchInput.toLowerCase())) || (member.lastName.toLowerCase().includes(searchInput.toLowerCase()))) {
-                    return team;
+                    return transformedTeam;
                 }
             });
 
