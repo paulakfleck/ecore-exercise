@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-// import { createRoot } from 'react-dom/client';
 import Welcome from './Welcome';
 
 describe('Welcome component', () => {

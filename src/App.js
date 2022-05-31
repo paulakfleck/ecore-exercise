@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+// import { Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import MainHeader from './components/MainHeader';
 import Welcome from './components/Welcome';
@@ -8,7 +9,7 @@ import TeamDetails from './components/Teams/TeamDetails';
 
 function App() {
   return (
-    <React.Fragment>
+    <BrowserRouter>
       <MainHeader />
 
       <main>
@@ -19,7 +20,7 @@ function App() {
           <Route path="/teams/:team" element={<TeamDetails />} />
         </Routes>
       </main>
-    </React.Fragment>
+    </BrowserRouter>
   );
 }
 
