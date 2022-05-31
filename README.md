@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# e-Core exercise
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Comments from the author
+Hello, e-Core team!
+
+Thank you for this opportunity. Below, you can find the instructions to run the project.
+
+Regarding my approach on how to solve the problem:
+
+I started from the assumption that the "current user" mentioned in the instructions is already logged.
+
+It was required that the website had 2 pages/routes: teams (a list of all available teams) and team details (information about the current team, with members from that team).
+
+It also required a filter by two different parameters: filtered by team name, and filtered by team member names.
+
+My solution was to split Teams into 3 components.
+- Main page
+- List of all teams
+- Details of each team
+
+And also to split Members (users) into 2 components:
+- List of all members
+- Details of each member
+
+This way, I see that I can easily import each component wherever I want, in case the website grows bigger or change.
+
+The most major pieces of code are:
+- `hooks/useFetch.js` - a custom hook I did to all fetch calls.
+- `components/Teams/TeamDetails.js` - it gets the team from the URL (or props),  and loads the details of each team. It also calls the `<MemberList />` component. The search also happens here.
+- `components/Member/MemberDetails.js` - An individual component for each member (user) of a team. The search also happens here.
+
+I look forward to your feedback!
 
 ## Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
-
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tests
 
-### `npm test`
+### To run all tests: `npm run test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### To see test coverage: `npm run test:coverage`
 
-### `npm run build`
+## Final test coverage:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+------------------------|---------|----------|---------|---------|-------------------
+File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+------------------------|---------|----------|---------|---------|-------------------
+All files               |   95.34 |    77.35 |    93.1 |   95.29 | 
+ src                    |     100 |      100 |     100 |     100 | 
+  App.js                |     100 |      100 |     100 |     100 | 
+ src/components         |     100 |       75 |     100 |     100 | 
+  MainHeader.js         |     100 |       75 |     100 |     100 | 11
+  Search.js             |     100 |      100 |     100 |     100 | 
+  Welcome.js            |     100 |      100 |     100 |     100 | 
+ src/components/Members |   94.11 |    70.58 |     100 |   94.11 | 
+  MemberDetails.js      |    90.9 |    66.66 |     100 |    90.9 | 13
+  MembersList.js        |     100 |      100 |     100 |     100 | 
+ src/components/Teams   |   92.85 |       80 |   85.71 |   92.68 | 
+  TeamDetails.js        |   94.11 |    82.35 |      80 |   94.11 | 16
+  Teams.js              |   94.44 |    77.77 |   85.71 |   94.11 | 14
+  TeamsList.js          |   85.71 |       75 |     100 |   85.71 | 17
+ src/hooks              |     100 |      100 |     100 |     100 | 
+  useFetch.js           |     100 |      100 |     100 |     100 | 
+------------------------|---------|----------|---------|---------|-------------------
