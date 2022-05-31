@@ -6,9 +6,9 @@ import useFetch from './../../hooks/useFetch'
 import MembersList from '../Members/MembersList';
 import Search from './../Search';
 
-const TeamDetails = () => {
+const TeamDetails = (props) => {
     const url = 'https://cgjresszgg.execute-api.eu-west-1.amazonaws.com';
-    const teamId = useParams().team;
+    const teamId = useParams().team || props.team;
     const [team, setTeam] = useState({});
     const [searchInput, setSearchInput] = useState('');
 

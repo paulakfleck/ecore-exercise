@@ -1,101 +1,44 @@
-import { render, screen, waitFor, act, rerender } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom';
-import { when } from 'jest-when';
-
+import 'jest-location-mock';
 
 import TeamDetails from './TeamDetails';
 
-window.fetch = jest.fn();
-const oldFetch = window.fetch;
-
 describe('TeamDetails component', () => {
-    test('renders "team" and "team members" successfully', async () => {
-        const mockFetchTeam = {
+    jest.mock('react-router-dom', () => ({
+        ...jest.requireActual('react-router-dom'),
+        useParams: jest.fn().mockReturnValue({ TeamDetails: 'fakeService' }),
+    }))
+
+    test('renders a "team" if request succeed', async () => {
+        const mockTeamDetail = {
             "id": "7676a4bf-adfe-415c-941b-1739af07039b",
             "name": "Ordinary Coral Lynx",
             "teamLeadId": "b12fa35a-9c4c-4bf9-8f32-27cf03a1f190",
             "teamMemberIds": [
-                "b12fa35a-9c4c-4bf9-8f32-27cf0661f190"
+                "371d2ee8-cdf4-48cf-9ddb-04798b79ad9e",
+                "54383a18-425c-4f50-9424-1c4c27e776dd",
+                "e0dba3dc-313d-4648-bd9c-4ddc8b189e84",
+                "b047d3f4-3469-47ce-a03f-1637a6de036b",
+                "ee91a519-fefa-48a7-bdf7-672bde38aef9",
+                "197c2b23-1218-44d0-b6b8-d757ba004515",
+                "e947058e-2d5f-47d9-925b-27bcab14c38e"
             ]
         };
 
-        const mockFetchMember1 = {
-            "id": "b12fa35a-9c4c-4bf9-8f32-27cf03a1f190",
-            "firstName": "Emmett",
-            "lastName": "Douglas",
-            "displayName": "emmettDouglas",
-            "avatarUrl": "https://cdn.fakercloud.com/avatars/alessandroribe_128.jpg",
-            "location": "South Margarita"
-        };
-        const mockFetchMember2 = {
-            "id": "b12fa35a-9c4c-4bf9-8f32-27cf0661f190",
-            "firstName": "Emmett",
-            "lastName": "Douglas",
-            "displayName": "emmettDouglas",
-            "avatarUrl": "https://cdn.fakercloud.com/avatars/alessandroribe_128.jpg",
-            "location": "South Margarita"
-        };
-
+        window.fetch = jest.fn();
 
         window.fetch.mockResolvedValueOnce({
             ok: true,
-            json: async () => mockFetchTeam
-        });
-        
-        render(<Router><TeamDetails /></Router>);
-        expect(screen.getByText("Loading...")).toBeInTheDocument();
-        expect(screen.getByText("No members found.")).toBeInTheDocument();
-        // expect(await screen.findByText("Ordinary Coral Lynx")).toBeInTheDocument();
-        // expect(await screen.findByText("Loading..."')).toBeInTheDocument();
-        
-        window.fetch.mockResolvedValueOnce({
-            ok: true,
-            json: async () => mockFetchMember1
+            json: async () => mockTeamDetail
         });
 
-        window.fetch.mockResolvedValueOnce({
-            ok: true,
-            json: async () => mockFetchMember2
-        });
-        
+
+        render(<Router><TeamDetails team={mockTeamDetail['id']} /></Router>);
+
         await waitFor(() => {
-            expect(screen.findByText("Ordinary Coral Lynx")).toBeInTheDocument();
-            expect(screen.getByText("South Margarita")).toBeInTheDocument();
-            screen.debug();
+            const titleMsg = screen.getByText(mockTeamDetail['name']);
+            expect(titleMsg).toBeInTheDocument();
         });
-
-
-        // const view = render(<Router><TeamDetails /></Router>);
-
-        // await waitFor(() => {
-
-        //     // act(() => {
-        //     //     window.fetch.mockResolvedValueOnce({
-        //     //         ok: true,
-        //     //         json: async () => mockFetchMember
-        //     //     });
-
-        //     //     jest.runAllTimers();
-
-        //     //     expect(screen.getByText("South Margarita")).toBeInTheDocument();
-        //     //   });
-
-        //     // expect(screen.getByText("Ordinary Coral Lynx")).toBeInTheDocument();
-
-        //     // rerender(<Router><TeamDetails /></Router>);
-
-        //     // const itemElement = await screen.findByRole('listitem');
-        //     // expect(itemElement).toBeInTheDocument();
-        // });
-
     })
-
-    // test('renders empty "members"', () => {
-    //     const membersMock =  [];
-    //     render(<Router><MembersList members={membersMock} /></Router>);
-
-    //     const el = screen.getByText('No members found.');
-
-    //     expect(el).toBeInTheDocument();
-    // })
-})
+});
