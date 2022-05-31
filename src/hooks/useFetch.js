@@ -27,7 +27,6 @@ const useFetch = (url, applyData) => {
     };
 
     return { isLoading, error, fetchData };
-
 };
 
 export default useFetch;

@@ -1,6 +1,5 @@
-import { render, screen, waitFor, act } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom';
-import 'jest-location-mock';
 
 import TeamDetails from './TeamDetails';
 
@@ -32,7 +31,6 @@ describe('TeamDetails component', () => {
             ok: true,
             json: async () => mockTeamDetail
         });
-
 
         render(<Router><TeamDetails team={mockTeamDetail['id']} /></Router>);
 

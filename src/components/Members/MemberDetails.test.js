@@ -27,7 +27,5 @@ describe('MemberDetails component', () => {
             const locationMsg = screen.getByText(mockMemberDetail['location']);
             expect(locationMsg).toBeInTheDocument();
         });
-
-        
     })
 });
