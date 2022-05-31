@@ -50,11 +50,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 ## Final test coverage:
 
 ------------------------|---------|----------|---------|---------|-------------------
-File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 ------------------------|---------|----------|---------|---------|-------------------
-All files               |   95.34 |    77.35 |    93.1 |   95.29 | 
- src                    |     100 |      100 |     100 |     100 | 
-  App.js                |     100 |      100 |     100 |     100 | 
+All files               |   95.34 |    77.35 |    93.1 |   95.29 |                   
+ src                    |     100 |      100 |     100 |     100 |                   
+  App.js                |     100 |      100 |     100 |     100 |                   
  src/components         |     100 |       75 |     100 |     100 | 
   MainHeader.js         |     100 |       75 |     100 |     100 | 11
   Search.js             |     100 |      100 |     100 |     100 | 

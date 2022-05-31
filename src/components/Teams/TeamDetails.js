@@ -31,15 +31,6 @@ const TeamDetails = (props) => {
         fetchTeam();
     }, []);
 
-    // useEffect(() => {
-    //     const delayDebounceFn = setTimeout(() => {
-    //         fetchTeam();
-    //     }, 300);
-
-    //     return () => clearTimeout(delayDebounceFn)
-    // }, [searchInput]);
-
-
     // I tried fetching multiple users in a single request, but I was not successful, so I had to make one call for each member.
     // Patterns I tried: "url/users/<id>,<id>" and "url/users/<id>/<id>"
     const getMemberIds = (fetchedTeam) => {
