@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Route, Routes, Navigate } from 'react-router-dom';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import MainHeader from './components/MainHeader';
