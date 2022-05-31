@@ -30,6 +30,7 @@ describe('Teams component', () => {
         const itemElement = await screen.findByRole('listitem');
 		expect(itemElement).toBeInTheDocument();
     })
+    
     test('renders "Something went wrong" if request failed', async () => {
         window.fetch = jest.fn();
 

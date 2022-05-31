@@ -1,33 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import MemberDetails from './MemberDetails';
 
 const MembersList = (props) => {
-    if (typeof props.members !== 'boolean') {
-        // Since the images were not loading from cnd.fakercloud, I removed the "alt" text so the page is more friendly, but I prefer to add "alt" to images.
+    if (props.members) {
         const listItems = props.members.map((member) =>
-            <li key={member.id}>
-                <figure>
-                    <img src={member.avatarUrl} />
-                    <figcaption>
-                        {member.firstName} {member.lastName}
-                    </figcaption>
-                </figure>
-
-                <h4 className="location">Based in: <span>{member.location}</span></h4>
-            </li>
+            <MemberDetails key={member} member={member} filter={props.filterMembers} />
         );
 
-        if (listItems.length === 0) {
-            return (
-                <ul className="empty-results">
-                    <li>No members found.</li>
-                </ul>
-            );
-
-        } else {
-            return (
-                <ul className="list-of-cards">{listItems}</ul>
-            )
-        }
+        return (
+            <ul className="list-of-cards">{listItems}</ul>
+        )
+    } else {
+        return (
+            <ul className="empty-results">
+                <li key="0">No members found.</li>
+            </ul>
+        );
     }
 }
 
